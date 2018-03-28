@@ -1,0 +1,51 @@
+﻿<Window x:Class="AccountSwitcherV3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AccountSwitcherV3"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="388.778" Width="164.062" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual" Visibility="Hidden" Topmost="True" Closed="Window_Closed" ShowInTaskbar="False" >
+
+    <Window.Resources>
+        <Storyboard x:Key="stbRadarBoundsLoop" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="RadarBoundRotate" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:3" Timeline.DesiredFrameRate="1" ></DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard Storyboard="{StaticResource stbRadarBoundsLoop}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    
+    <Grid Background="#FF2E2E2E">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="68*"/>
+            <RowDefinition Height="321*"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle x:Name="RadarBound" RenderTransformOrigin="0.5,0.5" Height="389"  StrokeThickness="2" VerticalAlignment="Top" HorizontalAlignment="Center" Width="164" Grid.RowSpan="2">
+            <Rectangle.Stroke>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" >
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform x:Name="RadarBoundRotate" Angle="0" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF23FF00" Offset="1"/>
+                    <GradientStop Color="#FF00FFE8" Offset="0.004"/>
+                </LinearGradientBrush>
+            </Rectangle.Stroke>
+        </Rectangle>
+
+        <ScrollViewer x:Name="scrollviewer" Grid.RowSpan="2" VerticalScrollBarVisibility="Hidden" Margin="0,10">
+            <StackPanel x:Name="panel" Grid.RowSpan="2" ScrollViewer.CanContentScroll="True" Margin="0,0,0,47">
+            </StackPanel>
+        </ScrollViewer>
+        
+
+    </Grid>
+</Window>
